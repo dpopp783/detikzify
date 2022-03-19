@@ -4,6 +4,7 @@ from TikzPicture import TikzPicture
 class TikzPictureCodeGenerator:
 
     picture: TikzPicture
+    libraries = set()
     code: List[str]
 
     def __init__(self, picture: TikzPicture):
@@ -30,3 +31,23 @@ class TikzPictureCodeGenerator:
         self.code.append("\\end{tikzpicture}")
 
         return self.code
+
+    def create_tex_file(self, file_name: str):
+        self.add_tex_boilerplate()
+
+        with open(file_name, "w") as tex_file:
+            for line in self.code:
+                tex_file.write(line)
+                tex_file.write("\n")
+
+
+    def add_tex_boilerplate(self):
+
+        self.code.insert(0, "\\begin{document}")
+        self.code.append("\\end{document}")
+
+        ## TODO add line for tikzpackage imports
+
+        self.code.insert(0, "\\usepackage{tikz}")
+        self.code.insert(0, "\\documentclass{article}")
+
