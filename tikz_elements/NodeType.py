@@ -3,39 +3,24 @@ from typing import List
 class NodeType:
 
     name: str
-    params: List[List[str]] = [[]]
-    shape: str = ""
+    params: List[str] = []
 
 
-    def __init__(self, name:str, shape:str, params: List[List[str]]):
+    def __init__(self, name:str, shape:str, **kwargs):
         self.name = name
-        self.shape = shape
-        self.params = params
+        self.params.append("draw")
+        self.params.append(shape)
+
+        for kw, val in kwargs.items():
+            self.params.append(f"{kw}={val}")
 
     def __repr__(self):
         return self.name
 
     def params_to_string(self) -> str:
-
-        ret: str = ""
-
-        for param in self.params:
-            if len(param) == 1:
-                ret += f", {param[0]}"
-            elif len(param) > 1:
-                ret += f", {param[0]}={param[1]}"
-
-        return ret
+        return ", ".join(self.params)
 
     def tikz_code(self) -> str:
-        tikz_code: str = f"\t\\tikzstyle\u007b{self.name}\u007d = [draw"
-
-        if self.shape:
-            tikz_code += f", {self.shape}"
-
-        if self.params[0]:
-            tikz_code += f", {self.params_to_string()}]"
-
-        tikz_code += "]"
+        tikz_code: str = f"\t\\tikzstyle\u007b{self.name}\u007d = [{self.params_to_string()}]"
 
         return tikz_code
