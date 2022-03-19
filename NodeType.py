@@ -21,19 +21,21 @@ class NodeType:
 
         for param in self.params:
             if len(param) == 1:
-                ret += f", {param[1]}"
-            else:
-                ret += f", {param[1]}={param[2]}"
+                ret += f", {param[0]}"
+            elif len(param) > 1:
+                ret += f", {param[0]}={param[1]}"
 
         return ret
 
     def tikz_code(self) -> str:
-        tikz_code: str = f"\\tikzstyle\u007b{self.name}\u007d = [draw"
+        tikz_code: str = f"\t\\tikzstyle\u007b{self.name}\u007d = [draw"
 
         if self.shape:
-            tikz_code += f", {self.shape}, "
+            tikz_code += f", {self.shape}"
 
-        if self.params:
-            tikz_code += f", {self.params_to_string}]"
+        if self.params[0]:
+            tikz_code += f", {self.params_to_string()}]"
+
+        tikz_code += "]"
 
         return tikz_code
