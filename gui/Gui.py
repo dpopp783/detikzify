@@ -12,8 +12,13 @@ class GUI:
         def pos_in_button(self, pos: List[int]):
             pass
 
+        def click(self, mouse_pos: List[int]):
+            # check if mouse_pos is in the button, then apply whatever effects we need
+            pass
+
     screen_width: int
     screen_height: int
+    buttons: List[Button]
 
     def __init__(self, width: int, height: int):
         self.screen_width = width
@@ -22,15 +27,22 @@ class GUI:
 
     def run(self):
         while True:
+
             for event in pygame.event.get():
+
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     quit()
+
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                         quit()
 
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    mouse_pos: List[int] = pygame.mouse.get_pos()
+                    for button in self.buttons:
+                        button.click(mouse_pos)
 
 def start(screen_width: int, screen_height: int):
     pygame.init()
