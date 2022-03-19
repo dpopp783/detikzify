@@ -17,5 +17,5 @@ class Line:
         self.in_arrow = ">" if arrow_flags[1] else ""
 
     def tikz_code(self):
-        code = f"\draw[{self.out_arrow}-{self.in_arrow}] ({self.start.path_id()}) -- ({self.end.path_id()})"
+        code = f"\t\draw[{self.out_arrow}-{self.in_arrow}] ({self.start.path_id()}) -- ({self.end.path_id()});"
         return code
