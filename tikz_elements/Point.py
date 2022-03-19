@@ -7,3 +7,6 @@ class Point:
     x: int = field()
     y: int = field()
     name: str = field(init=False)
+
+    def path_id(self):
+        return f"{self.x,self.y}"

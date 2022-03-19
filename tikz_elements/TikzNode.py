@@ -29,6 +29,9 @@ class TikzNode:
 
         return ret
 
+    def path_id(self):
+        return self.name
+
     def tikz_code(self) -> str:
         tikz_code: str = f"\t\\node[{self.node_type}"
 
