@@ -13,7 +13,6 @@ class TikzPictureCodeGenerator:
 
     def generate_tikz_code(self) -> List[str]:
 
-        # TODO fix double backslash, for some reason escape character isn't working
         self.code.append("\\begin{tikzpicture}")
 
         # TODO add specifications
@@ -26,10 +25,8 @@ class TikzPictureCodeGenerator:
         for node in self.picture.nodes:
             self.code.append(node.tikz_code())
 
-        # TODO add code for edges
         for edge in self.picture.lines:
             self.code.append(edge.tikz_code())
-            print(self.code[-1])
 
         self.code.append("\\end{tikzpicture}")
 
@@ -56,7 +53,7 @@ class TikzPictureCodeGenerator:
         self.code.insert(0, "\\begin{document}")
         self.code.append("\\end{document}")
 
-        ## TODO add line for tikzpackage imports
+        # TODO add line for tikzpackage imports
 
         self.code.insert(0, "\\usepackage{tikz}")
         self.code.insert(0, "\\documentclass{article}")
