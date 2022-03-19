@@ -9,7 +9,6 @@ class Line:
     in_arrow: str = ""
     params: List[str] = []
 
-
     def __init__(self, start, end, **kwargs):
 
         self.start = start
