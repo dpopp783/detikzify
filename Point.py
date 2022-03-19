@@ -1,7 +1,9 @@
 from dataclasses import dataclass
+from dataclasses import field
 
 @dataclass
 class Point:
     """Class for keeping track of points x and y"""
-    x: int
-    y: int
+    x: int = field()
+    y: int = field()
+    name: str = field(init=False)
