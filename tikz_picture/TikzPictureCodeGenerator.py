@@ -27,6 +27,9 @@ class TikzPictureCodeGenerator:
             self.code.append(node.tikz_code())
 
         # TODO add code for edges
+        for edge in self.picture.lines:
+            self.code.append(edge.tikz_code())
+            print(self.code[-1])
 
         self.code.append("\\end{tikzpicture}")
 
