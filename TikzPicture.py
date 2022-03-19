@@ -13,6 +13,12 @@ class TikzPicture:
     def __init__(self):
         pass
 
+    def add_node_type(self, nt: NodeType):
+        self.node_types.append(nt)
+
+    def add_node(self, node: TikzNode):
+        self.nodes.append(node)
+
 
 
 
