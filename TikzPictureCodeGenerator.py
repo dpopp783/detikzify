@@ -35,6 +35,13 @@ class TikzPictureCodeGenerator:
     def create_tex_file(self, file_name: str):
         self.add_tex_boilerplate()
 
+        # add .tex if needed
+        if file_name[-3:] != ".tex":
+            file_name += ".tex"
+
+        # move to output directory
+        file_name = "output\\" + file_name
+
         with open(file_name, "w") as tex_file:
             for line in self.code:
                 tex_file.write(line)
