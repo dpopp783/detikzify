@@ -1,8 +1,8 @@
 from typing import List
 
-from NodeType import NodeType
-from TikzNode import TikzNode
-from Point import Point
+from tikz_elements.NodeType import NodeType
+from tikz_elements.TikzNode import TikzNode
+
 
 class TikzPicture:
 

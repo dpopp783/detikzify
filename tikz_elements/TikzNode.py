@@ -1,7 +1,8 @@
 from typing import List
-import Point
+from tikz_elements.Point import Point
 from collections import defaultdict
-import NodeType
+from tikz_elements.NodeType import NodeType
+
 
 class TikzNode:
 

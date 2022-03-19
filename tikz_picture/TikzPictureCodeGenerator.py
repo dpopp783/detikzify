@@ -1,5 +1,5 @@
 from typing import List
-from TikzPicture import TikzPicture
+from tikz_picture.TikzPicture import TikzPicture
 
 class TikzPictureCodeGenerator:
 
