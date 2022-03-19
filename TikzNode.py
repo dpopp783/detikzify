@@ -29,7 +29,7 @@ class TikzNode:
         return ret
 
     def tikz_code(self) -> str:
-        tikz_code: str = f"\\node[{self.node_type}"
+        tikz_code: str = f"\t\\node[{self.node_type}"
 
         if self.params:
             tikz_code += f"{self.params_to_string()}"
@@ -42,9 +42,11 @@ class TikzNode:
         if self.location != None:
             tikz_code += f" at {self.location.x,self.location.y}"
 
+        tikz_code += " {"
+
         if self.label:
             tikz_code += f" \u007b{self.label}\u007d"
 
-        tikz_code += ";"
+        tikz_code += "};"
 
         return tikz_code
