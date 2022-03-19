@@ -7,11 +7,11 @@ class TikzNode:
 
     node_type: NodeType
     params: dict[str,str]
-    name:str = ""
+    name: str = ""
     label: str = ""
     location: Point = None
 
-    def __init__(self, nt: NodeType, name:str, params: List[List[str]], location: Point):
+    def __init__(self, nt: NodeType, name: str, params: List[List[str]], location: Point = None):
         self.node_type = nt
         self.name = name
         self.location = location
