@@ -1,6 +1,16 @@
 import pygame
+from typing import List
 
 class GUI:
+
+    class Button:
+
+        def __init__(self, x, y, width, height, color, label, label_color):
+            self.rect = pygame.Rect(x, y, width, height)
+            self.color = color
+
+        def pos_in_button(self, List[int]):
+            pass
 
     screen_width: int
     screen_height: int
