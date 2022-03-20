@@ -3,7 +3,7 @@ from typing import Callable
 from tikz_elements.NodeType import NodeType
 from tikz_elements.Line import Line
 from collections import defaultdict
-from drawable import Point
+from tikz_elements.Point import Point
 
 class Node:
 
@@ -16,7 +16,7 @@ class Node:
     def __init__(self, nt: NodeType, name: str, distance: Callable, screen_location: Point = None):
         self.node_type = nt
         self.name = name
-        self.screen_location = Point
+        self.screen_location = screen_location
         self.dragging = False  
         self.offset_x = 0
         self.offset_y = 0
