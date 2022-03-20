@@ -6,8 +6,6 @@ from tikz_elements.NodeType import NodeType
 from tikz_picture.TikzPicture import TikzPicture
 from tikz_elements.DefaultNodeTypes import DefaultNodeTypes
 
-node_type_options: List[NodeType] = []
-
 tikz_picture: TikzPicture = TikzPicture()
 
 available_node_types = DefaultNodeTypes.default_node_types
@@ -16,7 +14,7 @@ def run(screen_width: int, screen_height: int):
 
     pygame.init()
 
-    pygame.display.set_caption("Detikzify")
+    pygame.display.set_caption("detikzify")
 
     window = pygame.display.set_mode((screen_width, screen_height))
 
@@ -42,9 +40,23 @@ def run(screen_width: int, screen_height: int):
                                             manager=button_manager)
 
     hand_draw_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((625, 325), (150, 50)),
-                                              text= 'Hand Draw',
-                                              manager=button_manager
-                                             )
+                                                    text= 'Hand Draw',
+                                                    manager=button_manager
+                                                    )
+
+    row = 0
+    col = 0
+    for node_type in available_node_types:
+        split_name = node_type.name.split("_")
+        node_text = split_name[0][0] + split_name[1][0]
+        create_node_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((button_panel.left + 25 + 50*col, button_panel.top + 100 + 50 * (row + 1)),(50, 50)),
+                                                          text=node_text,
+                                                          manager=button_manager
+                                                          )
+        buttons[node_type.name] = create_node_button
+        col = (col + 1) % 3
+        if col == 0:
+            row = (row + 1) % 3
 
     buttons["create_node_type"] = create_node_type_button
     buttons["generate_code"] = generate_code_button
