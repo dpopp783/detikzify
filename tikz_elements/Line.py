@@ -1,18 +1,21 @@
 from tikz_elements.TikzNode import TikzNode
 from tikz_elements.TikzCoord import TikzCoord
-from typing import List
+from typing import List, Union
+from dataclasses import dataclass
 
 class Line:
 
-    start = None
+    start: Union[None | TikzCoord] = None
+    end: Union[None | TikzCoord] = None
     out_arrow: str = ""
     in_arrow: str = ""
-    params: List[str] = []
+    params: List[str]
 
     def __init__(self, start, end, **kwargs):
 
         self.start = start
         self.end = end
+        self.params = []
 
         if "from_arrow" in kwargs.keys():
             self.out_arrow = "<" if kwargs["from_arrow"] else ""
