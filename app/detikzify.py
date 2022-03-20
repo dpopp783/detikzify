@@ -1,5 +1,16 @@
 import pygame
 import pygame_gui
+from typing import List
+
+from tikz_elements.NodeType import NodeType
+from tikz_picture.TikzPicture import TikzPicture
+from tikz_elements.DefaultNodeTypes import DefaultNodeTypes
+
+node_type_options: List[NodeType] = []
+
+tikz_picture: TikzPicture = TikzPicture()
+
+available_node_types = DefaultNodeTypes.default_node_types
 
 def run(screen_width: int, screen_height: int):
 
