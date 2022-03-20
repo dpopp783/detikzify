@@ -1,7 +1,7 @@
 import pygame
 
 
-class Node:
+class DraggableNode:
     def __init__(self, location, bounds):
         self.rect = pygame.rect.Rect(location)
         # stores whether the node is being dragged
@@ -17,8 +17,7 @@ class Node:
         return self.rect
 
     # figures out where the mouse is relative to the rectangle center
-    def get_mouse_orientation(self, event):
-        self.set_dragging(True)
+    def get_mouse_offset(self, event):
         mouse_x, mouse_y = event.pos
         self.offset_x = self.rect.x - mouse_x
         self.offset_y = self.rect.y - mouse_y
@@ -48,6 +47,9 @@ class Node:
     def set_dragging(self, mode):
         self.dragging = mode
 
+    def enter_dragging_mode(self, event):
+        self.set_dragging(True)
+        self.get_mouse_offset(event)
 
 def main():
     screen_width = 430
@@ -63,8 +65,14 @@ def main():
 
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Tracking System")
+
     bounds = [0, 0, screen_width, screen_height]
-    rectangle = Node([176, 134, 25, 25], bounds)
+    sqnode = DraggableNode([100, 100, 25, 25], bounds)
+    cnode = DraggableNode([200, 100, 25, 25], bounds)
+
+    nodes = [cnode, sqnode]
+    active_node = None
+
     clock = pygame.time.Clock()
 
     running = True
@@ -79,22 +87,29 @@ def main():
             # checks whether the rectangle has been clicked
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 if event.button == 1:
-                    if rectangle.get_node().collidepoint(event.pos):
-                        rectangle.get_mouse_orientation(event)
+                    for node in nodes:
+                        if node.get_node().collidepoint(event.pos):
+                            active_node = node
+
+                    active_node.enter_dragging_mode(event)
 
             # checks whether done dragging
             elif event.type == pygame.MOUSEBUTTONUP:
                 if event.button == 1:
-                    rectangle.set_dragging(False)
+                    if active_node:
+                        active_node.set_dragging(False)
+                        active_node = None
 
             # keeps the rectangle at the mouse location
             elif event.type == pygame.MOUSEMOTION:
-                if rectangle.get_dragging():
-                    rectangle.move_to_cursor(event)
+                if active_node:
+                    if active_node.get_dragging():
+                        active_node.move_to_cursor(event)
 
         # updates the window to test in
         screen.fill(white)
-        pygame.draw.rect(screen, black, rectangle.get_node(), 3)
+        pygame.draw.rect(screen, black, sqnode.get_node(), 3)
+        pygame.draw.circle(screen, black, cnode.get_node().center, cnode.get_node().width // 2, 3)
         pygame.display.flip()
         clock.tick(fps)
 
