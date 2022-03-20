@@ -24,3 +24,4 @@ class NodeType:
         tikz_code: str = f"\t\\tikzstyle\u007b{self.name}\u007d = [{self.params_to_string()}]"
 
         return tikz_code
+
