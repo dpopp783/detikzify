@@ -1,4 +1,6 @@
-from detikzify.tikz_elements.NodeType import NodeType
+from typing import Callable
+
+from tikz_elements.NodeType import NodeType
 from tikz_elements.Line import Line
 from collections import defaultdict
 from drawable import Point
@@ -9,9 +11,9 @@ class Node:
     name: str = ""
     label: str = ""
     screen_location: Point = None
-    distance: function
+    distance: Callable
 
-    def __init__(self, nt: NodeType, name: str, distance: function, screen_location: Point = None):
+    def __init__(self, nt: NodeType, name: str, distance: Callable, screen_location: Point = None):
         self.node_type = nt
         self.name = name
         self.screen_location = Point

@@ -1,7 +1,8 @@
 from typing import List
-from tikz_elements.Point import Point
 from collections import defaultdict
+
 from tikz_elements.NodeType import NodeType
+from tikz_elements.TikzCoord import TikzCoord
 
 
 class TikzNode:
@@ -10,9 +11,9 @@ class TikzNode:
     params: dict[str,str]
     name: str = ""
     label: str = ""
-    location: Point = None
+    location: TikzCoord = None
 
-    def __init__(self, nt: NodeType, name: str, params: List[List[str]], location: Point = None):
+    def __init__(self, nt: NodeType, name: str, params: List[List[str]], location: TikzCoord = None):
         self.node_type = nt
         self.name = name
         self.location = location

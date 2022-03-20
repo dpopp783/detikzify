@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from dataclasses import field
 
 @dataclass
-class Point:
+class TikzCoord:
     """Class for keeping track of points x and y"""
     x: int = field()
     y: int = field()

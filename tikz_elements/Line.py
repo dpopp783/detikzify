@@ -1,5 +1,5 @@
 from tikz_elements.TikzNode import TikzNode
-from tikz_elements.Point import Point
+from tikz_elements.TikzCoord import TikzCoord
 from typing import List
 
 class Line:
