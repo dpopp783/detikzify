@@ -1,14 +1,11 @@
 import pygame
 import pygame_gui
-from typing import List
+from typing import List, Union
 
 from tikz_elements.NodeType import NodeType
 from tikz_picture.TikzPicture import TikzPicture
 from tikz_elements.DefaultNodeTypes import DefaultNodeTypes
-
-tikz_picture: TikzPicture = TikzPicture()
-
-available_node_types = DefaultNodeTypes.default_node_types
+from gui.DraggableNode import DraggableNode
 
 def run(screen_width: int, screen_height: int):
 
@@ -24,8 +21,14 @@ def run(screen_width: int, screen_height: int):
     button_panel = pygame.Rect((screen_width * 3 // 4, 0), (screen_width // 4, screen_height))
     button_panel_color = pygame.Color("#909090")
 
-    canvas = pygame.Rect((50, 50),(screen_width * 5 // 8, screen_height * 5 // 6))
+    canvas = pygame.surface.Surface((screen_width * 5 // 8, screen_height * 5 // 6))
     canvas_color = pygame.Color("#FFFFFF")
+
+    tikz_picture: TikzPicture = TikzPicture()
+
+    available_node_types = DefaultNodeTypes.default_node_types
+    nodes: List[DraggableNode] = []
+    active_node = None
 
     button_manager = pygame_gui.UIManager((screen_width, screen_height))
 
@@ -62,6 +65,8 @@ def run(screen_width: int, screen_height: int):
     buttons["generate_code"] = generate_code_button
     buttons["hand_draw"] = hand_draw_button
 
+
+
     clock = pygame.time.Clock()
 
     while True:
@@ -86,17 +91,51 @@ def run(screen_width: int, screen_height: int):
                     print("Clicked Generate Code")
                 elif event.ui_element == buttons["hand_draw"]:
                     print("Clicked Hand Draw")
+                elif event.ui_element == buttons["cnode_small"]:
+                    cnode_small = DraggableNode([0, 0, 25, 25], canvas, "circle")
+                    nodes.append(cnode_small)
+
+            # checks whether the rectangle has been clicked
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                if event.button == 1:
+                    for node in nodes:
+                        if node.get_node().collidepoint(event.pos):
+                            active_node = node
+
+                    if active_node:
+                        active_node.enter_dragging_mode(event)
+
+            # checks whether done dragging
+            elif event.type == pygame.MOUSEBUTTONUP:
+                if event.button == 1:
+                    if active_node:
+                        active_node.set_dragging(False)
+                        active_node = None
+
+            # keeps the active DraggableNode at the mouse location
+            elif event.type == pygame.MOUSEMOTION:
+                if active_node:
+                    if active_node.get_dragging():
+                        active_node.move_to_cursor(event)
 
             button_manager.process_events(event)
 
         button_manager.update(time_delta)
 
         window.blit(background, (0, 0))
+
+        canvas.fill(canvas_color)
+
+        for node in nodes:
+            draw_func = node.draw_func()
+            draw_func(node.surface, pygame.color.Color("#000000"), node.rect, 2)
+        window.blit(canvas, (50, 50))
+
         pygame.draw.rect(background, button_panel_color, button_panel)
-        pygame.draw.rect(background, canvas_color, canvas)
         button_manager.draw_ui(background)
 
         pygame.display.update()
 
 if __name__ == "__main__":
+
     run(800,600)
