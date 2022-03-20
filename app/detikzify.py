@@ -113,7 +113,8 @@ def run(screen_width: int, screen_height: int):
             # checks whether the rectangle has been clicked
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 click_x_rel_to_canvas = event.pos[0] - 50
-                click_y_rel_to_canvas = event.pos[0] - 50
+                click_y_rel_to_canvas = event.pos[1] - 50
+
                 if event.button == 1:
                     for node in nodes:
                         if node.get_node().collidepoint(click_x_rel_to_canvas, click_y_rel_to_canvas):
