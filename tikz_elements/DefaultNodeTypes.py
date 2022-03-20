@@ -4,7 +4,7 @@ from tikz_elements.NodeType import NodeType
 
 class DefaultNodeTypes:
 
-    default_node_types: List[NodeType]
+    default_node_types: List[NodeType] = []
 
     cnode_small: NodeType = NodeType("cnode_small", "circle", 0.5)
     cnode_med: NodeType = NodeType("cnode_med", "circle", 1)
