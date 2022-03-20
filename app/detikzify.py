@@ -12,22 +12,22 @@ def run(screen_width: int, screen_height: int):
     background = pygame.Surface((screen_width, screen_height))
     background.fill(pygame.Color("#A0A0A0"))
 
-    button_panel = pygame.Surface((screen_width // 4, screen_height))
-    button_panel.fill(pygame.Color("#909090"))
+    button_panel = pygame.Rect((screen_width * 3 // 4, 0),(screen_width // 4, screen_height))
+    button_panel_color = pygame.Color("#909090")
 
-    button_manager = pygame_gui.UIManager((screen_width // 4, screen_height))
+    button_manager = pygame_gui.UIManager((screen_width, screen_height))
 
     buttons = dict()
 
-    create_node_type_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((25, 25), (150, 50)),
+    create_node_type_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((625, 25), (150, 50)),
                                             text='Create Node Type',
                                             manager=button_manager)
 
-    generate_code_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((25, 525), (150, 50)),
+    generate_code_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((625, 525), (150, 50)),
                                             text='Generate Code',
                                             manager=button_manager)
 
-    hand_draw_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((25, 325), (150, 50)),
+    hand_draw_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((625, 325), (150, 50)),
                                               text= 'Hand Draw',
                                               manager=button_manager
                                              )
@@ -66,8 +66,8 @@ def run(screen_width: int, screen_height: int):
         button_manager.update(time_delta)
 
         window.blit(background, (0, 0))
-        window.blit(button_panel, (screen_width * 3 // 4, 0))
-        button_manager.draw_ui(button_panel)
+        pygame.draw.rect(background, button_panel_color, button_panel)
+        button_manager.draw_ui(background)
 
         pygame.display.update()
 
