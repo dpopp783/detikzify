@@ -4,8 +4,8 @@ from dataclasses import field
 @dataclass
 class TikzCoord:
     """Class for keeping track of points x and y"""
-    x: int = field()
-    y: int = field()
+    x: float = field()
+    y: float = field()
     name: str = field(init=False)
 
     def path_id(self):
