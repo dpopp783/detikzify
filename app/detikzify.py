@@ -23,8 +23,11 @@ def run(screen_width: int, screen_height: int):
     background = pygame.Surface((screen_width, screen_height))
     background.fill(pygame.Color("#A0A0A0"))
 
-    button_panel = pygame.Rect((screen_width * 3 // 4, 0),(screen_width // 4, screen_height))
+    button_panel = pygame.Rect((screen_width * 3 // 4, 0), (screen_width // 4, screen_height))
     button_panel_color = pygame.Color("#909090")
+
+    canvas = pygame.Rect((50, 50),(screen_width * 5 // 8, screen_height * 5 // 6))
+    canvas_color = pygame.Color("#FFFFFF")
 
     button_manager = pygame_gui.UIManager((screen_width, screen_height))
 
@@ -78,6 +81,7 @@ def run(screen_width: int, screen_height: int):
 
         window.blit(background, (0, 0))
         pygame.draw.rect(background, button_panel_color, button_panel)
+        pygame.draw.rect(background, canvas_color, canvas)
         button_manager.draw_ui(background)
 
         pygame.display.update()
