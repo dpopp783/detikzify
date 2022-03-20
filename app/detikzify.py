@@ -27,8 +27,14 @@ def run(screen_width: int, screen_height: int):
                                             text='Generate Code',
                                             manager=button_manager)
 
+    hand_draw_button = pygame_gui.elements.UIButton(relative_rect=pygame.Rect((25, 325), (150, 50)),
+                                              text= 'Hand Draw',
+                                              manager=button_manager
+                                             )
+
     buttons["create_node_type"] = create_node_type_button
     buttons["generate_code"] = generate_code_button
+    buttons["hand_draw"] = hand_draw_button
 
     clock = pygame.time.Clock()
 
@@ -52,6 +58,8 @@ def run(screen_width: int, screen_height: int):
                     print("Clicked Create Node Type")
                 elif event.ui_element == buttons["generate_code"]:
                     print("Clicked Generate Code")
+                elif event.ui_element == buttons["hand_draw"]:
+                    print("Clicked Hand Draw")
 
             button_manager.process_events(event)
 
