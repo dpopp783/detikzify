@@ -40,7 +40,8 @@ class TikzPictureCodeGenerator:
             file_name += ".tex"
 
         # move to output directory
-        file_name = "output\\" + file_name
+        # TODO get full path to output directory
+        file_name = "..\\output\\" + file_name
 
         with open(file_name, "w") as tex_file:
             for line in self.code:

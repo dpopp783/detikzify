@@ -1,3 +1,5 @@
+import datetime
+
 import pygame
 import pygame_gui
 from typing import List, Union
@@ -6,6 +8,8 @@ from tikz_elements.NodeType import NodeType
 from tikz_picture.TikzPicture import TikzPicture
 from tikz_elements.DefaultNodeTypes import DefaultNodeTypes
 from gui.DraggableNode import DraggableNode
+from tikz_picture.TikzPictureCodeGenerator import TikzPictureCodeGenerator
+
 
 def run(screen_width: int, screen_height: int):
 
@@ -88,7 +92,10 @@ def run(screen_width: int, screen_height: int):
                 if event.ui_element == buttons["create_node_type"]:
                     print("Clicked Create Node Type")
                 elif event.ui_element == buttons["generate_code"]:
-                    print("Clicked Generate Code")
+                    file_name = str(datetime.datetime.now())[:-7].replace(":","-")
+                    generator: TikzPictureCodeGenerator = TikzPictureCodeGenerator(tikz_picture)
+                    generator.generate_tikz_code()
+                    generator.create_tex_file(file_name)
                 elif event.ui_element == buttons["hand_draw"]:
                     print("Clicked Hand Draw")
                 elif event.ui_element == buttons["cnode_small"]:
