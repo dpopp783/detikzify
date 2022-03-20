@@ -94,6 +94,21 @@ def run(screen_width: int, screen_height: int):
                 elif event.ui_element == buttons["cnode_small"]:
                     cnode_small = DraggableNode([0, 0, 25, 25], canvas, "circle")
                     nodes.append(cnode_small)
+                elif event.ui_element == buttons["cnode_med"]:
+                    cnode_med = DraggableNode([0, 0, 50, 50], canvas, "circle")
+                    nodes.append(cnode_med)
+                elif event.ui_element == buttons["cnode_large"]:
+                    cnode_large = DraggableNode([0, 0, 100, 100], canvas, "circle")
+                    nodes.append(cnode_large)
+                elif event.ui_element == buttons["sqnode_small"]:
+                    sqnode_small = DraggableNode([0, 0, 25, 25], canvas, "rect")
+                    nodes.append(sqnode_small)
+                elif event.ui_element == buttons["sqnode_med"]:
+                    sqnode_med = DraggableNode([0, 0, 50, 50], canvas, "rect")
+                    nodes.append(sqnode_med)
+                elif event.ui_element == buttons["sqnode_large"]:
+                    sqnode_large = DraggableNode([0, 0, 100, 100], canvas, "rect")
+                    nodes.append(sqnode_large)
 
             # checks whether the rectangle has been clicked
             elif event.type == pygame.MOUSEBUTTONDOWN:
