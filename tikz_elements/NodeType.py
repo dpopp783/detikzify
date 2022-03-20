@@ -1,5 +1,5 @@
-from typing import List
-from Distances import Distances
+from typing import List, Callable
+from tikz_elements.Distances import Distances
 
 class NodeType:
 
@@ -7,9 +7,9 @@ class NodeType:
     params: List[str] = []
     shape: str
     min_size: float
-    dist: function
+    dist: Callable
 
-    def __init__(self, name: str, min_size: float, shape: str, dist: function, **kwargs):
+    def __init__(self, name: str, min_size: float, shape: str, dist: Callable=Distances.ManhattanDistance, **kwargs):
         self.name = name
         self.params.append("draw")
         self.params.append(shape)
