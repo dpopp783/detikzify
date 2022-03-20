@@ -1,23 +1,23 @@
 from typing import Callable
 
-from tikz_elements.NodeType import NodeType
+from tikz_elements.NodeStyle import NodeStyle
 from tikz_elements.Line import Line
 from collections import defaultdict
 from tikz_elements.Point import Point
 
 class Node:
 
-    node_type: NodeType
+    node_type: NodeStyle
     name: str = ""
     label: str = ""
     screen_location: Point = None
     distance: Callable
 
-    def __init__(self, nt: NodeType, name: str, distance: Callable, screen_location: Point = None):
+    def __init__(self, nt: NodeStyle, name: str, distance: Callable, screen_location: Point = None):
         self.node_type = nt
         self.name = name
         self.screen_location = screen_location
-        self.dragging = False  
+        self.dragging = False
         self.offset_x = 0
         self.offset_y = 0
 

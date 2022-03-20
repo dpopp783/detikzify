@@ -1,7 +1,7 @@
 from typing import List, Callable
 from tikz_elements.Distances import Distances
 
-class NodeType:
+class NodeStyle:
 
     name: str
     params: List[str] = []

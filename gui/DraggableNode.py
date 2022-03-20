@@ -1,9 +1,14 @@
 import pygame
 from typing import List, Callable
 
+from tikz_elements.DefaultNodeStyles import DefaultNodeStyles
+from tikz_elements.TikzNode import TikzNode
+from tikz_elements.TikzCoord import TikzCoord
+from tikz_elements.NodeStyle import NodeStyle
+
 
 class DraggableNode:
-    def __init__(self, node_rect: List[int], surface: pygame.surface.Surface, shape: str):
+    def __init__(self, node_rect: List[int], surface: pygame.surface.Surface, shape: str, style: NodeStyle):
         self.rect = pygame.rect.Rect(node_rect)
         # stores whether the node is being dragged
         self.dragging = False
@@ -11,6 +16,12 @@ class DraggableNode:
         self.offset_y = 0
         self.surface = surface
         self.shape = shape
+        self.style = style
+        self.tikz_node = TikzNode(style, "", location=TikzCoord(0,0))
+
+    def get_tikz_node(self):
+        # update TikzNode position and return
+        pass
 
     def get_dragging(self):
         return self.dragging
@@ -77,8 +88,8 @@ def main():
     pygame.display.set_caption("Tracking System")
 
     canvas = pygame.surface.Surface((screen_width, screen_height))
-    sqnode = DraggableNode([100, 100, 50, 50], canvas, "rect")
-    cnode = DraggableNode([200, 100, 26, 26], canvas, "circle")
+    sqnode = DraggableNode([100, 100, 50, 50], canvas, "rect", DefaultNodeStyles.sqnode_med)
+    cnode = DraggableNode([200, 100, 26, 26], canvas, "circle", DefaultNodeStyles.cnode_small)
 
     nodes = [cnode, sqnode]
     active_node = None

@@ -1,5 +1,5 @@
 '''
-Module holding distance functions that can be used by different Node Types
+Module holding distance functions that can be used by drawable Nodes
 '''
 # TODO change to PygameCoord
 from tikz_elements.TikzCoord import TikzCoord

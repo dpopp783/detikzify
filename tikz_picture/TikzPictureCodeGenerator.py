@@ -17,9 +17,9 @@ class TikzPictureCodeGenerator:
 
         # TODO add specifications
 
-        # add code for node type style definitions
-        for nt in self.picture.node_types:
-            self.code.append(nt.tikz_code())
+        # add code for node style definitions
+        for style in self.picture.node_styles:
+            self.code.append(style.tikz_code())
 
         # add code for each node
         for node in self.picture.nodes:

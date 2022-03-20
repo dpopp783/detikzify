@@ -1,26 +1,27 @@
 from typing import List
 from collections import defaultdict
 
-from tikz_elements.NodeType import NodeType
+from tikz_elements.NodeStyle import NodeStyle
 from tikz_elements.TikzCoord import TikzCoord
 
 
 class TikzNode:
 
-    node_type: NodeType
+    style: NodeStyle
     params: dict[str,str]
     name: str = ""
     label: str = ""
     location: TikzCoord = None
 
-    def __init__(self, nt: NodeType, name: str, params: List[List[str]], location: TikzCoord = None):
-        self.node_type = nt
+    def __init__(self, style: NodeStyle, name: str, params: List[List[str]] = [], location: TikzCoord = None):
+        self.style = style
         self.name = name
         self.location = location
 
         self.params = defaultdict()
-        for keyword, value in params:
-            self.params[keyword] = value
+        if params:
+            for keyword, value in params:
+                self.params[keyword] = value
 
     def params_to_string(self) -> str:
         ret: str = ""
@@ -34,7 +35,7 @@ class TikzNode:
         return self.name
 
     def tikz_code(self) -> str:
-        tikz_code: str = f"\t\\node[{self.node_type}"
+        tikz_code: str = f"\t\\node[{self.style}"
 
         if self.params:
             tikz_code += f"{self.params_to_string()}"
